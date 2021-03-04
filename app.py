@@ -38,7 +38,7 @@ def welcome():
         f"Available Routes:<br/>"
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
-        f"/api/v1.0/tobs"
+        f"/api/v1.0/tobs<br/>"
     )
 
 @app.route("/api/v1.0/precipitation")
@@ -93,18 +93,19 @@ def tobs():
 
     """Return a list of all stations"""
     # Query all stations
-    tobsResults = session.query(Measurements.date,Measurements.tobs).all()
+    tobsResults = session.query(Measurements.date, Measurements.tobs).all()
 
     session.close()
 
     all_tobs = []
-    for tobs in tobsResults:
+    for date, tobs in tobsResults:
         tobs_dict = {}
         tobs_dict["Date"] = date
-        tobs_dict["Tobs"] = tobs
+        tobs_dict["tobs"] = tobs
         all_tobs.append(tobs_dict)
 
     return jsonify(all_tobs)
+
 # @app.route("/api/v1.0/passengers")
 # def passengers():
 #     # Create our session (link) from Python to the DB
