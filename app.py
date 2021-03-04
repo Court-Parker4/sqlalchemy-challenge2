@@ -85,6 +85,26 @@ def stations():
         all_station.append(station_dict)
 
     return jsonify(all_station)
+
+@app.route("/api/v1.0/tobs")
+def tobs():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    """Return a list of all stations"""
+    # Query all stations
+    tobsResults = session.query(Measurements.date,Measurements.tobs).all()
+
+    session.close()
+
+    all_tobs = []
+    for tobs in tobsResults:
+        tobs_dict = {}
+        tobs_dict["Date"] = date
+        tobs_dict["Tobs"] = tobs
+        all_tobs.append(tobs_dict)
+
+    return jsonify(all_tobs)
 # @app.route("/api/v1.0/passengers")
 # def passengers():
 #     # Create our session (link) from Python to the DB
