@@ -39,7 +39,8 @@ ______________________________________________
 -Design a query to retrieve the last 12 months of temperature observation data (TOBS).
     ** Filter by the station with the highest number of observations.
     ** Plot the results as a histogram with bins=12.
-    -------------------------------------------------------------
+
+-------------------------------------------------------------
 
 
 ## Station Analysis (app.py)
@@ -76,5 +77,5 @@ When given the start only, calculate TMIN, TAVG, and TMAX for all dates greater 
 
 
 When given the start and the end date, calculate the TMIN, TAVG, and TMAX for dates between the start and end date inclusive.
-----------------------------------------------------------------------------
+
 
