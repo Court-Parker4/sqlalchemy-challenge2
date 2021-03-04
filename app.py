@@ -39,6 +39,8 @@ def welcome():
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
+        f"/api/v1.0/<start>"
+        f"/api/v1.0/<start>/<end>"
     )
 
 @app.route("/api/v1.0/precipitation")
@@ -106,6 +108,26 @@ def tobs():
 
     return jsonify(all_tobs)
 
+    /api/v1.0/<start>
+@app.route("/api/v1.0/<start>")
+def start():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    """Return a list of all stations"""
+    # Query all stations
+    tobsResults = session.query(Measurements.date, Measurements.tobs).all()
+
+    session.close()
+
+    all_tobs = []
+    for date, tobs in tobsResults:
+        tobs_dict = {}
+        tobs_dict["Date"] = date
+        tobs_dict["tobs"] = tobs
+        all_tobs.append(tobs_dict)
+
+    return jsonify(all_tobs)
 # @app.route("/api/v1.0/passengers")
 # def passengers():
 #     # Create our session (link) from Python to the DB
